@@ -2,13 +2,16 @@
     "use strict";
 
     var semver = require('semver');
+    var jshint = require("simplebuild-jshint");
+
+
 
     desc("Deault build");
-    task("default", ["version"], function () {
+    task("default", ["version", "lint"], function () {
         console.log("\n\nBUILD OK");
     });
 
-    desc("Check Node version")
+    desc("Check Node version");
     task("version", function () {
         console.log("Checking node version: .");
 
@@ -17,8 +20,19 @@
 
         var actualVersion = process.version;
         if (semver.neq(expectedVersion, actualVersion)) {
-            fail("Incorrect Node version: expected " + expectedVersion + ", but was " + actualVersion)
+            fail("Incorrect Node version: expected " + expectedVersion + ", but was " + actualVersion);
         }
-    })
+    });
+
+    desc("Lint Javascript code");
+    task("lint", function () {
+        process.stdout.write("Linting Javascript: ");
+
+        jshint.checkFiles({
+            files: "Jakefile.js",
+            options: {},
+            globals: {}
+        }, complete, fail);
+    }, { async: true });
 
 }());
