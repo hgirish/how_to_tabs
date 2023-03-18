@@ -44,26 +44,39 @@
 
         jshint.checkFiles({
             files: ["Jakefile.js", "src/**/*.js"],
-            options: {
-                bitwise: true,
-                eqeqeq: true,
-                forin: true,
-                freeze: true,
-                futurehostile: true,
-                latedef: "nofunc",
-                noarg: true,
-                nocomma: true,
-                nonbsp: true,
-                nonew: true,
-                strict: true,
-                undef: true,
-
-                node: true,
-                browser: true
-            },
-            globals: {}
+            options: lintOptions(),
+            globals: lintGlobals()
         }, complete, fail);
     }, { async: true });
 
+    function lintOptions() {
+        return {
+            bitwise: true,
+            eqeqeq: true,
+            forin: true,
+            freeze: true,
+            futurehostile: true,
+            latedef: "nofunc",
+            noarg: true,
+            nocomma: true,
+            nonbsp: true,
+            nonew: true,
+            strict: true,
+            undef: true,
+
+            node: true,
+            browser: true
+        };
+
+        function lintGlobals() {
+            return {
+                describe: false,
+                it: false
+            };
+        }
+    }
+
 
 }());
+
+
