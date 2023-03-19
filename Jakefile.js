@@ -72,7 +72,8 @@
                 "Chrome 111.0.0.0 (Windows 10)",
                 "Edge 111.0.1661.44 (Windows 10)",
                 "Firefox 111.0 (Windows 10)",
-                "Chrome 112.0.0.0 (Windows 10)"
+                "Chrome 112.0.0.0 (Windows 10)",
+                "Chrome 111.0.0.0 (Android 12)"
             ],
             strict: !process.env.loose
         }, complete, fail);
