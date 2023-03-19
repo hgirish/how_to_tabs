@@ -1,6 +1,6 @@
 @echo off
 
-if not exist node_modules\.bin\karma goto :npm_rebuild
+if not exist node_modules\simplebuild-karma goto :npm_rebuild
 
 if exist node_modules\.bin\jake goto :run_jake
 

@@ -1,16 +1,30 @@
 /* globals jake:false, desc:false, task:false, complete:false, fail:false */
-
+/*jshint esversion: 6 */
 (function () {
     "use strict";
 
     var semver = require('semver');
     var jshint = require("simplebuild-jshint");
+    var karma = require("simplebuild-karma");
+
+    const KARMA_CONFIG = "karma.conf.js";
 
 
     //***** General-purpose tasks  */
 
+    desc("Start the karma server (run this first)");
+    task("karma", function () {
+        console.log("Starting Karma Server");
+        karma.start({
+            configFile: KARMA_CONFIG
+        }, complete, fail);
+    }, { async: true });
+
+
+
+
     desc("Deault build");
-    task("default", ["version", "lint"], function () {
+    task("default", ["version", "lint", "test"], function () {
         console.log("\n\nBUILD OK");
     });
 
@@ -49,6 +63,21 @@
         }, complete, fail);
     }, { async: true });
 
+    desc("Testing javascript code");
+    task("test", function () {
+        process.stdout.write("Testing Javascript: ");
+        karma.run({
+            configFile: KARMA_CONFIG,
+            expectedBrowsers: [
+                "Chrome 111.0.0.0 (Windows 10)",
+                "Edge 111.0.1661.44 (Windows 10)",
+                "Firefox 111.0 (Windows 10)",
+                "Chrome 112.0.0.0 (Windows 10)"
+            ],
+            strict: !process.env.loose
+        }, complete, fail);
+    }, { async: true });
+
     function lintOptions() {
         return {
             bitwise: true,
@@ -68,15 +97,25 @@
             browser: true
         };
 
-        function lintGlobals() {
-            return {
-                describe: false,
-                it: false
-            };
-        }
+
+    }
+
+    function lintGlobals() {
+        return {
+            // Mocha
+            describe: false,
+            it: false,
+            before: false,
+            after: false,
+            beforeEach: false,
+            afterEach: false
+        };
     }
 
 
 }());
+
+
+
 
 
