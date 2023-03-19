@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri Mar 17 2023 22:01:55 GMT-0700 (Pacific Daylight Time)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://www.npmjs.com/search?q=keywords:karma-adapter
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'commonjs'],
 
 
     // list of files / patterns to load in the browser
@@ -27,6 +27,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
+      'src/**/*.js': ['commonjs']
     },
 
 

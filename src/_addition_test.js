@@ -12,7 +12,7 @@
         });
 
         it("uses IEEE 754 floating point", function () {
-            assertEqual(addition.expectedadd(0.1, 0.2), 0.30000000000000004);
+            assertEqual(addition.add(0.1, 0.2), 0.30000000000000004);
         });
 
         function assertEqual(actual, expected) {
