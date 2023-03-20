@@ -1,6 +1,6 @@
 @echo off
 
-if not exist node_modules\.bin\browserify goto :npm_rebuild
+if not exist node_modules\shelljs goto :npm_rebuild
 
 if exist node_modules\.bin\jake goto :run_jake
 

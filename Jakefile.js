@@ -6,6 +6,7 @@
     var semver = require('semver');
     var jshint = require("simplebuild-jshint");
     var karma = require("simplebuild-karma");
+    var shell = require("shelljs");
 
     const KARMA_CONFIG = "karma.conf.js";
     const DIST_DIR = "generated/dist";
@@ -36,10 +37,11 @@
             complete);
     });
 
-    desc("Erasse all generated files"):
+    desc("Erasse all generated files");
     task("clean", function () {
         console.log("Erasing generated files: ");
 
+        shell.rm("-rf", "generated");
     });
 
 
