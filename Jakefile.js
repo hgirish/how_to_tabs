@@ -35,14 +35,14 @@
             interactive: true
         },
             complete);
-    });
+    }, { async: true });
 
     desc("Erase all generated files");
     task("clean", function () {
         console.log("Erasing generated files: ");
 
         shell.rm("-rf", "generated");
-    });
+    }, { async: true });
 
 
     //*** Supporting tasks  */
@@ -65,7 +65,7 @@
         process.stdout.write("Linting Javascript: ");
 
         jshint.checkFiles({
-            files: ["Jakefile.js", "src/**/*.js"],
+            files: ["Jakefile.js", "src/javascript/*.js"],
             options: lintOptions(),
             globals: lintGlobals()
         }, complete, fail);
@@ -91,9 +91,15 @@
     task("build", [DIST_DIR], function () {
         console.log("Building distribution directory: .");
 
-        shell.cp("src/index.html", DIST_DIR);
+        shell.rm("-rf", DIST_DIR + "/*");
+        shell.cp("src/content/*", DIST_DIR);
 
-    });
+        jake.exec("node node_modules/browserify/bin/cmd.js src/javascript/app.js -o " + DIST_DIR + "/bundle.js", {
+            interactive: true
+        },
+            complete);
+
+    }, { async: true });
 
     directory(DIST_DIR);
 
@@ -127,7 +133,8 @@
             before: false,
             after: false,
             beforeEach: false,
-            afterEach: false
+            afterEach: false,
+            directory: false
         };
     }
 
