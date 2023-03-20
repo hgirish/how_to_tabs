@@ -37,7 +37,7 @@
             complete);
     });
 
-    desc("Erasse all generated files");
+    desc("Erase all generated files");
     task("clean", function () {
         console.log("Erasing generated files: ");
 
@@ -89,7 +89,9 @@
 
     desc("Build distribution directory");
     task("build", [DIST_DIR], function () {
-        console.log("Building distribution directory: ");
+        console.log("Building distribution directory: .");
+
+        shell.cp("src/index.html", DIST_DIR);
 
     });
 
