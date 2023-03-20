@@ -42,7 +42,7 @@
         console.log("Erasing generated files: ");
 
         shell.rm("-rf", "generated");
-    }, { async: true });
+    });
 
 
     //*** Supporting tasks  */
