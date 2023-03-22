@@ -31,10 +31,7 @@
 
     desc("Run a localhost server");
     task("run", ["build"], function () {
-        jake.exec("node node_modules/http-server/bin/http-server " + DIST_DIR, {
-            interactive: true
-        },
-            complete);
+        jake.exec("node node_modules/http-server/bin/http-server " + DIST_DIR, { interactive: true }, complete);
     }, { async: true });
 
     desc("Erase all generated files");
