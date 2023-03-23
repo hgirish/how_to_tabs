@@ -8,7 +8,7 @@
 
         it("hides an element", function () {
             // Arrange
-            var element = document.createElement("div");
+            var element = addElement("div");
 
             // Act
             tabs.initialize(element);
@@ -21,5 +21,11 @@
         });
 
     });
+
+    function addElement(tagName) {
+        var element = document.createElement(tagName);
+        document.body.appendChild(element);
+        return element;
+    }
 
 }());
