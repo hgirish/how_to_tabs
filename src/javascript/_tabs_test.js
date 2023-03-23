@@ -14,10 +14,16 @@
 
             assert.equal(getDisplayProperty(element), "none");
 
+            removeElement(element);
+
 
         });
 
     });
+
+    function removeElement(element) {
+        element.parentNode.removeChild(element);
+    }
 
     function getDisplayProperty(element) {
         var styles = getComputedStyle(element);
