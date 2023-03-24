@@ -25,8 +25,6 @@
 
             assert.equal(getClass(element), "someClass");
 
-            removeElement(element);
-
         });
 
         it("sets a class on an element without erasing exisisting class", function () {
@@ -37,7 +35,6 @@
 
             assert.equal(getClass(element), "existingClass newClass");
 
-            removeElement(element);
         });
 
         function getClass(element) {
