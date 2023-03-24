@@ -6,7 +6,7 @@
 
     describe("Tabs", function () {
 
-        it("hides an element", function () {
+        it("sets a class on an element when that elment  has no exisisting classes", function () {
 
             var element = addElement("div");
 
