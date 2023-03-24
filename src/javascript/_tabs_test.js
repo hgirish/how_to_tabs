@@ -10,25 +10,22 @@
 
             var element = addElement("div");
 
-            tabs.initialize(element);
+            tabs.initialize(element, "someClass");
 
-            assert.equal(getDisplayProperty(element), "none");
+            assert.equal(getClass(element), "someClass");
 
             removeElement(element);
-
 
         });
 
     });
 
-    function removeElement(element) {
-        element.parentNode.removeChild(element);
+    function getClass(element) {
+        return element.getAttribute("class");
     }
 
-    function getDisplayProperty(element) {
-        var styles = getComputedStyle(element);
-        var display = styles.getPropertyValue("display");
-        return display;
+    function removeElement(element) {
+        element.parentNode.removeChild(element);
     }
 
     function addElement(tagName) {
