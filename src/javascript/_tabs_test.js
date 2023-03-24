@@ -5,6 +5,17 @@
     var tabs = require("./tabs.js");
 
     describe("Tabs", function () {
+        var container;
+
+        beforeEach(function () {
+            container = document.createElement("div");
+            document.body.appendChild(container);
+        });
+
+        afterEach(function () {
+            removeElement(container);
+        });
+
 
         it("sets a class on an element when that elment  has no exisisting classes", function () {
 
@@ -29,20 +40,21 @@
             removeElement(element);
         });
 
+        function getClass(element) {
+            return element.getAttribute("class");
+        }
+
+        function removeElement(element) {
+            element.parentNode.removeChild(element);
+        }
+
+        function addElement(tagName) {
+            var element = document.createElement(tagName);
+            container.appendChild(element);
+            return element;
+        }
     });
 
-    function getClass(element) {
-        return element.getAttribute("class");
-    }
 
-    function removeElement(element) {
-        element.parentNode.removeChild(element);
-    }
-
-    function addElement(tagName) {
-        var element = document.createElement(tagName);
-        document.body.appendChild(element);
-        return element;
-    }
 
 }());
