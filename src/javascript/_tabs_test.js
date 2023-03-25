@@ -25,9 +25,9 @@
             var defaultTab = createTab();
             var tab3 = createTab();
 
-            var element1 = addElement("div");
-            var defaultElement = addElement("div");
-            var element3 = addElement("div");
+            var element1 = createTabContent();
+            var defaultElement = createTabContent();
+            var element3 = createTabContent();
 
             tabs.initialize({
                 tabs: [tab1, defaultTab, tab3],
@@ -50,8 +50,8 @@
             var defaultTab = createTab();
             var hiddenTab = createTab();
 
-            var defaultElement = addElement("div");
-            var hiddenElement = addElement("div");
+            var defaultElement = createTabContent();
+            var hiddenElement = createTabContent();
             hiddenElement.setAttribute("class", "existingClass");
 
             tabs.initialize({
@@ -67,7 +67,7 @@
 
         it("styles the default tab with a class", function () {
             var defaultTab = createTab();
-            var defaultElement = addElement("div");
+            var defaultElement = createTabContent();
 
             tabs.initialize({
                 tabs: [defaultTab],
@@ -98,6 +98,11 @@
         function createTab() {
             var element = addElement("div");
             element.innerHTML = "Tab";
+            return element;
+        }
+        function createTabContent() {
+            var element = addElement("div");
+            element.innerHTML = "Content";
             return element;
         }
     });
