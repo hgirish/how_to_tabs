@@ -5,8 +5,8 @@
     exports.initialize = function initialize(options) {
         const { tabs, content, defaultElement, contentHideClass, activeTabClass } = options;
 
-        //if (tabs === undefined) throw new Error("expected options.tabs");
-
+        if (tabs === undefined) throw new Error("expected options.tabs");
+        if (activeTabClass === undefined) throw new Error("expected options.activeTabClass");
         if (content === undefined) throw new Error("expected options.content");
         if (defaultElement === undefined) throw new Error("expected options.defaultElement");
         if (contentHideClass === undefined) throw new Error("expected options.contentHideClass");

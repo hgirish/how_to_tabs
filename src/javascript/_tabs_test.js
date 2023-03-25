@@ -20,13 +20,20 @@
 
 
         it("hides all content elements except the default content", function () {
+
+            var tab1 = addElement("div");
+            var defaultTab = addElement("div");
+            var tab3 = addElement("div");
+
             var element1 = addElement("div");
             var defaultElement = addElement("div");
             var element3 = addElement("div");
 
             tabs.initialize({
+                tabs: [tab1, defaultTab, tab3],
                 content: [element1, defaultElement, element3],
                 defaultElement: defaultElement,
+                activeTabClass: "activeTab",
                 contentHideClass: "hideClass"
             });
 
@@ -40,13 +47,18 @@
 
 
         it("preserves existing classes when hiding an element", function () {
+            var defaultTab = addElement("div");
+            var hiddenTab = addElement("div");
+
             var defaultElement = addElement("div");
             var hiddenElement = addElement("div");
             hiddenElement.setAttribute("class", "existingClass");
 
             tabs.initialize({
+                tabs: [defaultTab, hiddenTab],
                 content: [defaultElement, hiddenElement],
                 defaultElement: defaultElement,
+                activeTabClass: "activeTab",
                 contentHideClass: "newClass"
             });
 
