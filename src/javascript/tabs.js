@@ -3,22 +3,35 @@
     "use strict";
 
     exports.initialize = function initialize(options) {
-        const { tabs, content, defaultElement, contentHideClass, activeTabClass } = options;
+        const { tabs, content, defaultTab, hiddenContentClass, activeTabClass } = options;
 
-        if (tabs === undefined) throw new Error("expected options.tabs");
-        if (activeTabClass === undefined) throw new Error("expected options.activeTabClass");
-        if (content === undefined) throw new Error("expected options.content");
-        if (defaultElement === undefined) throw new Error("expected options.defaultElement");
-        if (contentHideClass === undefined) throw new Error("expected options.contentHideClass");
+        checkOption(tabs, "options.tabs");
+        checkOption(activeTabClass, "options.activeTabClass");
+        checkOption(content, "options.content");
+        checkOption(defaultTab, "options.defaultTab");
+        checkOption(hiddenContentClass, "options.hiddenContentClass");
 
+        const activeIndex = findIndexOfDefaultElement(tabs, defaultTab);
+        const defaultContent = content[activeIndex];
 
         content.forEach(element => {
-            element.classList.add(contentHideClass);
+            element.classList.add(hiddenContentClass);
         });
-        defaultElement.classList.remove(contentHideClass);
+        defaultContent.classList.remove(hiddenContentClass);
 
-        if (tabs) tabs[0].classList.add(activeTabClass);
+        defaultTab.classList.add(activeTabClass);
 
     };
+
+    function checkOption(option, name) {
+        if (option === undefined) throw new Error("Expected " + name);
+    }
+
+    function findIndexOfDefaultElement(contentTabs, defaultContentTab) {
+        for (let i = 0; i < contentTabs.length; i++) {
+            if (contentTabs[i] === defaultContentTab) return i;
+        }
+        throw new Error("Could not find default in list");
+    }
 
 })();
