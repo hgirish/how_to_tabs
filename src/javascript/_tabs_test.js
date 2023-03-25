@@ -23,7 +23,7 @@
 
             tabs.initialize([element], "someClass");
 
-            assert.equal(getClass(element), "someClass");
+            assert.equal(getClasses(element), "someClass");
 
         });
 
@@ -34,9 +34,9 @@
 
             tabs.initialize([element1, element2, element3], "hideClass");
 
-            assert.equal(getClass(element1), "hideClass", "element 1");
-            assert.equal(getClass(element2), "hideClass", "element 2");
-            assert.equal(getClass(element3), "hideClass", "element 3");
+            assert.equal(getClasses(element1), "hideClass", "element 1");
+            assert.equal(getClasses(element2), "hideClass", "element 2");
+            assert.equal(getClasses(element3), "hideClass", "element 3");
 
         });
 
@@ -47,12 +47,12 @@
 
             tabs.initialize([element], "newClass");
 
-            assert.equal(getClass(element), "existingClass newClass");
+            assert.equal(getClasses(element), "existingClass newClass");
 
         });
 
 
-        function getClass(element) {
+        function getClasses(element) {
             return element.getAttribute("class");
         }
 
