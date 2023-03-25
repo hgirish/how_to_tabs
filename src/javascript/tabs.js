@@ -1,13 +1,11 @@
+/* jshint esversion: 6 */
 (function () {
     "use strict";
 
-    exports.initialize = function initialize(element, className) {
-        element.classList.add(className);
-        // var classes = element.getAttribute("class");
-        // if (classes === null) classes = className;
-        // else classes += " " + className;
-
-        // element.setAttribute("class", classes);
+    exports.initialize = function initialize(elementList, className) {
+        elementList.forEach(element => {
+            element.classList.add(className);
+        });
     };
 
 })();

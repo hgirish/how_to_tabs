@@ -21,7 +21,7 @@
 
             var element = addElement("div");
 
-            tabs.initialize(element, "someClass");
+            tabs.initialize([element], "someClass");
 
             assert.equal(getClass(element), "someClass");
 
@@ -31,9 +31,22 @@
             var element = addElement("div");
             element.setAttribute("class", "existingClass");
 
-            tabs.initialize(element, "newClass");
+            tabs.initialize([element], "newClass");
 
             assert.equal(getClass(element), "existingClass newClass");
+
+        });
+
+        it("hides multiple elements", function () {
+            var element1 = addElement("div");
+            var element2 = addElement("div");
+            var element3 = addElement("div");
+
+            tabs.initialize([element1, element2, element3], "hideClass");
+
+            assert.equal(getClass(element1), "hideClass", "element 1");
+            assert.equal(getClass(element2), "hideClass", "element 2");
+            assert.equal(getClass(element3), "hideClass", "element 3");
 
         });
 
