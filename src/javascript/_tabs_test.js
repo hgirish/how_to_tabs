@@ -17,23 +17,13 @@
         });
 
 
-        it("sets a class on an element when that elment  has no exisisting classes", function () {
+        it("hides an element by setting a class", function () {
 
             var element = addElement("div");
 
             tabs.initialize([element], "someClass");
 
             assert.equal(getClass(element), "someClass");
-
-        });
-
-        it("sets a class on an element without erasing exisisting class", function () {
-            var element = addElement("div");
-            element.setAttribute("class", "existingClass");
-
-            tabs.initialize([element], "newClass");
-
-            assert.equal(getClass(element), "existingClass newClass");
 
         });
 
@@ -49,6 +39,18 @@
             assert.equal(getClass(element3), "hideClass", "element 3");
 
         });
+
+
+        it("preserves existing classes when hiding an element", function () {
+            var element = addElement("div");
+            element.setAttribute("class", "existingClass");
+
+            tabs.initialize([element], "newClass");
+
+            assert.equal(getClass(element), "existingClass newClass");
+
+        });
+
 
         function getClass(element) {
             return element.getAttribute("class");
