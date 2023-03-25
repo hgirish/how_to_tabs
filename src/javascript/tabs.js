@@ -1,4 +1,4 @@
-/* jshint esversion: 6 */
+/* jshint esversion: 6, varstmt: true,  strict:true */
 (function () {
     "use strict";
 
