@@ -21,9 +21,9 @@
 
         it("hides all content elements except the default content", function () {
 
-            var tab1 = addElement("div");
-            var defaultTab = addElement("div");
-            var tab3 = addElement("div");
+            var tab1 = createTab();
+            var defaultTab = createTab();
+            var tab3 = createTab();
 
             var element1 = addElement("div");
             var defaultElement = addElement("div");
@@ -47,8 +47,8 @@
 
 
         it("preserves existing classes when hiding an element", function () {
-            var defaultTab = addElement("div");
-            var hiddenTab = addElement("div");
+            var defaultTab = createTab();
+            var hiddenTab = createTab();
 
             var defaultElement = addElement("div");
             var hiddenElement = addElement("div");
@@ -66,7 +66,7 @@
         });
 
         it("styles the default tab with a class", function () {
-            var defaultTab = addElement("div");
+            var defaultTab = createTab();
             var defaultElement = addElement("div");
 
             tabs.initialize({
@@ -92,6 +92,12 @@
         function addElement(tagName) {
             var element = document.createElement(tagName);
             container.appendChild(element);
+            return element;
+        }
+
+        function createTab() {
+            var element = addElement("div");
+            element.innerHTML = "Tab";
             return element;
         }
     });
