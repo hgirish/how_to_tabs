@@ -50,10 +50,22 @@
                 contentHideClass: "newClass"
             });
 
-            // tabs.initialize(defaultElement, [defaultElement, hiddenElement], "newClass");
-
             assert.equal(getClasses(hiddenElement), "existingClass newClass");
+        });
 
+        it("styles the default tab with a class", function () {
+            var defaultTab = addElement("div");
+            var defaultElement = addElement("div");
+
+            tabs.initialize({
+                tabs: [defaultTab],
+                content: [defaultElement],
+                defaultElement: defaultElement,
+                activeTabClass: "activeTab",
+                contentHideClass: "ignored"
+            });
+
+            assert.equal(getClasses(defaultTab), "activeTab");
         });
 
 

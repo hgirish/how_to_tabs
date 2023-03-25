@@ -3,7 +3,9 @@
     "use strict";
 
     exports.initialize = function initialize(options) {
-        const { content: content, defaultElement, contentHideClass: contentHideClass } = options;
+        const { tabs, content, defaultElement, contentHideClass, activeTabClass } = options;
+
+        //if (tabs === undefined) throw new Error("expected options.tabs");
 
         if (content === undefined) throw new Error("expected options.content");
         if (defaultElement === undefined) throw new Error("expected options.defaultElement");
@@ -14,6 +16,9 @@
             element.classList.add(contentHideClass);
         });
         defaultElement.classList.remove(contentHideClass);
+
+        if (tabs) tabs[0].classList.add(activeTabClass);
+
     };
 
 })();
