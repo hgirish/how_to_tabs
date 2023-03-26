@@ -9,6 +9,9 @@
         let container;
 
         const ACTIVE_TAB_CLASS = "activeTab";
+        const ACTIVE_TAB = "activeClass";
+        const HIDDEN_CONTENT = "hideClass";
+        const IRRELEVANT = "irrelevant";
 
         beforeEach(function () {
             container = document.createElement("div");
@@ -19,7 +22,7 @@
             removeElement(container);
         });
 
-        it("hides all content elements except the default upon initialization", function () {
+        it("use a class to hide all content elements except the default upon initialization", function () {
 
 
             const defaultTab = createTab();
@@ -32,52 +35,57 @@
                 tabs: [createTab(), defaultTab, createTab()],
                 content: [content1, defaultContent, content3],
                 defaultTab: defaultTab,
-                activeTabClass: ACTIVE_TAB_CLASS,
-                hiddenContentClass: "hideClass"
+                activeTabClass: IRRELEVANT,
+                hiddenContentClass: HIDDEN_CONTENT
             });
 
-            assert.equal(getClasses(content1), "hideClass", "element 1 should be hidden");
-            assert.equal(getClasses(defaultContent), "", "default element should not be hidden");
-            assert.equal(getClasses(content3), "hideClass", "element 3 should be hidden");
-
+            assertContentHidden(content1, "element 1");
+            assertContentVisible(defaultContent, "default content");
+            assertContentHidden(content3, "element 3");
         });
 
 
-        it("preserves existing classes when hiding an element", function () {
+        it("preserves existing classes when adding new classes", function () {
             const defaultTab = createTab();
+            defaultTab.setAttribute("class", "existingTabClass");
 
             const defaultContent = createTabContent();
             const hiddenContent = createTabContent();
-            hiddenContent.setAttribute("class", "existingClass");
+            hiddenContent.setAttribute("class", "existingContentClass");
 
             tabs.initialize({
                 tabs: [defaultTab, createTab()],
                 content: [defaultContent, hiddenContent],
                 defaultTab: defaultTab,
-                activeTabClass: ACTIVE_TAB_CLASS,
-                hiddenContentClass: "newClass"
+                activeTabClass: "activeTab",
+                hiddenContentClass: "hiddenContent"
             });
 
-            assert.equal(getClasses(hiddenContent), "existingClass newClass");
+            assert.equal(getClasses(defaultTab),
+                "existingTabClass activeTab", "tab should preserve existing classes");
+            assert.equal(getClasses(hiddenContent),
+                "existingContentClass hiddenContent", "content should preserve existing classes");
+
         });
 
-        it("styles the default tab with a class", function () {
+        it("styles the default tab with a class upon initialization", function () {
             const tab1 = createTab();
             const defaultTab = createTab();
             const tab3 = createTab();
+
             const defaultContent = createTabContent();
 
             tabs.initialize({
                 tabs: [tab1, defaultTab, tab3],
                 content: [createTabContent(), defaultContent, createTabContent()],
                 defaultTab: defaultTab,
-                activeTabClass: ACTIVE_TAB_CLASS,
-                hiddenContentClass: "ignored"
+                activeTabClass: ACTIVE_TAB,
+                hiddenContentClass: IRRELEVANT
             });
 
-            assert.equal(getClasses(tab1), null, "tab 1 should not be styled");
-            assert.equal(getClasses(defaultTab), ACTIVE_TAB_CLASS, "default element should be styled");
-            assert.equal(getClasses(tab3), null, "tab 3 should not be styled");
+            assertTabInactive(tab1, "tab 1");
+            assertTabActive(defaultTab, "default tab");
+            assertTabInactive(tab3, "tab 3");
         });
 
 
@@ -104,6 +112,21 @@
             const element = addElement("div");
             element.innerHTML = "Content";
             return element;
+        }
+        function assertContentHidden(element, elementName) {
+            assert.equal(getClasses(element), HIDDEN_CONTENT, elementName + " should be hidden");
+        }
+
+        function assertContentVisible(element, elementName) {
+            assert.equal(getClasses(element), "", elementName + " should not be hidden");
+        }
+
+        function assertTabActive(element, elementName) {
+            assert.equal(getClasses(element), ACTIVE_TAB, elementName + " should be active");
+        }
+
+        function assertTabInactive(element, elementName) {
+            assert.equal(getClasses(element), null, elementName + " should not be styled");
         }
     });
 
