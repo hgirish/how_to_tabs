@@ -123,6 +123,28 @@
             assertTabInactive(tab3, "tab 3 should be hidden");
         });
 
+        it("handles clicks on sub-element within tab element", function () {
+            const defaultTab = createTab();
+            const complexTab = addElement("div");
+            complexTab.innerHTML = "<a id='link'>link</a>";
+            const link = document.getElementById('link');
+
+
+            tabs.initialize({
+                tabs: [defaultTab, complexTab],
+                content: [createTabContent(), createTabContent()],
+                defaultTab: defaultTab,
+                activeTabClass: ACTIVE_TAB,
+                hiddenContentClass: IRRELEVANT
+            });
+
+            link.click();
+
+            assertTabActive(complexTab);
+
+
+        });
+
 
         function getClasses(element) {
             return element.getAttribute("class") || '';
