@@ -11,17 +11,21 @@
         checkOption(defaultTab, "options.defaultTab");
         checkOption(hiddenContentClass, "options.hiddenContentClass");
 
-        const activeIndex = findIndexOfDefaultElement(tabs, defaultTab);
-        const defaultContent = content[activeIndex];
-
-        content.forEach(element => {
-            element.classList.add(hiddenContentClass);
-        });
-        defaultContent.classList.remove(hiddenContentClass);
-
-        defaultTab.classList.add(activeTabClass);
+        showTab(options.defaultTab, options);
 
     };
+
+    function showTab(tabToShow, options) {
+        const activeIndex = findIndexOfDefaultElement(options.tabs, tabToShow);
+        const contentToShow = options.content[activeIndex];
+
+        options.content.forEach(element => {
+            element.classList.add(options.hiddenContentClass);
+        });
+        contentToShow.classList.remove(options.hiddenContentClass);
+
+        tabToShow.classList.add(options.activeTabClass);
+    }
 
     function checkOption(option, name) {
         if (option === undefined) throw new Error("Expected " + name);
