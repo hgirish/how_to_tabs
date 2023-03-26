@@ -57,16 +57,23 @@
                 tabs: [tab1, tab2, tab3],
                 content: [content1, content2, content3],
                 defaultTab: tab1,
-                activeTabClass: "activeTab",
+                activeTabClass: ACTIVE_TAB,
                 hiddenContentClass: HIDDEN_CONTENT
             });
 
-            // click tab 2
-            // assert content 2 is visible
-            // assert content 1 is no longer visible
+            tab2.click();
+            assertContentVisible(content2, "content 2");
+            assertContentHidden(content1, "content 1");
+            assertContentHidden(content3, "content 3");
 
-            // assert tab 2 is active
+            assertTabActive(tab2, "tab2");
+
             // assert tab 1 is no longer active
+
+            tab3.click();
+            assertContentVisible(content3, "content 3");
+            assertContentHidden(content1, "content 1");
+            assertContentHidden(content2, "content 2");
         });
 
 

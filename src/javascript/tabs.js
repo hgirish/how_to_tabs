@@ -13,6 +13,14 @@
 
         showTab(options.defaultTab, options);
 
+
+        tabs.forEach(function (tabElement) {
+            tabElement.addEventListener("click", function (event) {
+                showTab(event.target, options);
+            });
+        });
+
+
     };
 
     function showTab(tabToShow, options) {
