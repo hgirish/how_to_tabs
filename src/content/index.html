@@ -6,19 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tab Example</title>
-    <link rel="stylesheet" href="screen.css">
+    <link rel="stylesheet" href="screen.css?v=1.0.0.1">
+    <script defer src="bundle.js?v=1.0.0.4"></script>
 </head>
 
 <body>
     <ul class="tabs">
-        <li><a>Tab 1</a></li>
-        <li><a>Tab 2</a></li>
-        <li><a>Tab 3</a></li>
+        <li id="tab1"><a>Tab 1</a></li>
+        <li id="tab2"><a>Tab 2</a></li>
+        <li id="tab3"><a>Tab 3</a></li>
     </ul>
 
     <div class="container">
 
-        <div>
+        <div id="content1">
             <h1>Tab 1 Content</h1>
 
             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
@@ -38,7 +39,7 @@
                 consequat, leo eget bibendum sodales, augue velit cursus nunc, </p>
         </div>
 
-        <div>
+        <div id="content2">
             <h1>Tab 2 Content</h1>
 
             <p>Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit
@@ -46,7 +47,7 @@
                 nunc, </p>
         </div>
 
-        <div>
+        <div id="content3">
             <h1>Tab 3 Content</h1>
 
             <p>Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi
