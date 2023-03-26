@@ -16,7 +16,9 @@
     };
 
     function showTab(tabToShow, options) {
-        const activeIndex = findIndexOfDefaultElement(options.tabs, tabToShow);
+        const activeIndex = options.tabs.findIndex((element => element === tabToShow));
+        if (activeIndex === -1) throw new Error("Could not find default in list");
+
         const contentToShow = options.content[activeIndex];
 
         options.content.forEach(element => {
@@ -31,11 +33,6 @@
         if (option === undefined) throw new Error("Expected " + name);
     }
 
-    function findIndexOfDefaultElement(contentTabs, defaultContentTab) {
-        for (let i = 0; i < contentTabs.length; i++) {
-            if (contentTabs[i] === defaultContentTab) return i;
-        }
-        throw new Error("Could not find default in list");
-    }
+
 
 })();
