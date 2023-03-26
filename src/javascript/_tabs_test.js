@@ -44,6 +44,32 @@
             assertContentHidden(content3, "element 3");
         });
 
+        it("switch content when tab is clicked", function () {
+            const tab1 = createTab();
+            const tab2 = createTab();
+            const tab3 = createTab();
+
+            const content1 = createTabContent();
+            const content2 = createTabContent();
+            const content3 = createTabContent();
+
+            tabs.initialize({
+                tabs: [tab1, tab2, tab3],
+                content: [content1, content2, content3],
+                defaultTab: tab1,
+                activeTabClass: "activeTab",
+                hiddenContentClass: HIDDEN_CONTENT
+            });
+
+            // click tab 2
+            // assert content 2 is visible
+            // assert content 1 is no longer visible
+
+            // assert tab 2 is active
+            // assert tab 1 is no longer active
+        });
+
+
 
         it("preserves existing classes when adding new classes", function () {
             const defaultTab = createTab();
