@@ -62,18 +62,20 @@
             });
 
             tab2.click();
-            assertContentVisible(content2, "content 2");
-            assertContentHidden(content1, "content 1");
-            assertContentHidden(content3, "content 3");
+            assertContentVisible(content2, "content2 should be visible after click");
+            assertTabActive(tab2, "tab2 should be visible after click");
 
-            assertTabActive(tab2, "tab2");
-
-            // assert tab 1 is no longer active
+            assertContentHidden(content1, "content1 should no longer be visible after click");
+            assertTabInactive(tab1, "tab1 should no longer be visible after click");
 
             tab3.click();
-            assertContentVisible(content3, "content 3");
-            assertContentHidden(content1, "content 1");
-            assertContentHidden(content2, "content 2");
+            assertContentVisible(content3, "content3 should be visible after click");
+            assertTabActive(tab3, "tab3 should be visible after click");
+
+            assertContentHidden(content1, "content1 should no longer be visible after click");
+            assertTabInactive(tab1, "tab1 should no longer be visible after click");
+
+
         });
 
 
@@ -116,14 +118,14 @@
                 hiddenContentClass: IRRELEVANT
             });
 
-            assertTabInactive(tab1, "tab 1");
-            assertTabActive(defaultTab, "default tab");
-            assertTabInactive(tab3, "tab 3");
+            assertTabInactive(tab1, "tab 1 should be hidden");
+            assertTabActive(defaultTab, "default tab should not be hidden");
+            assertTabInactive(tab3, "tab 3 should be hidden");
         });
 
 
         function getClasses(element) {
-            return element.getAttribute("class");
+            return element.getAttribute("class") || '';
         }
 
         function removeElement(element) {
@@ -146,20 +148,21 @@
             element.innerHTML = "Content";
             return element;
         }
-        function assertContentHidden(element, elementName) {
-            assert.equal(getClasses(element), HIDDEN_CONTENT, elementName + " should be hidden");
+
+        function assertTabActive(element, message) {
+            assert.equal(getClasses(element), ACTIVE_TAB, message);
         }
 
-        function assertContentVisible(element, elementName) {
-            assert.equal(getClasses(element), "", elementName + " should not be hidden");
+        function assertTabInactive(element, message) {
+            assert.equal(getClasses(element), "", message);
         }
 
-        function assertTabActive(element, elementName) {
-            assert.equal(getClasses(element), ACTIVE_TAB, elementName + " should be active");
+        function assertContentHidden(element, message) {
+            assert.equal(getClasses(element), HIDDEN_CONTENT, message);
         }
 
-        function assertTabInactive(element, elementName) {
-            assert.equal(getClasses(element), null, elementName + " should not be styled");
+        function assertContentVisible(element, message) {
+            assert.equal(getClasses(element), "", message);
         }
     });
 
