@@ -16,7 +16,8 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'src/javascript/**/*.js',
-      'src/vendor/chai-4.3.7.js'
+      'src/vendor/chai-4.3.7.js',
+      'src/vendor/sinon-15.0.3.js'
     ],
 
 
@@ -29,7 +30,8 @@ module.exports = function (config) {
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
       'src/javascript/**/*.js': ['commonjs'],
-      'src/vendor/chai-4.3.7.js': ['commonjs']
+      'src/vendor/chai-4.3.7.js': ['commonjs'],
+      'src/vendor/sinon-15.0.3.js': ['commonjs']
     },
 
 
